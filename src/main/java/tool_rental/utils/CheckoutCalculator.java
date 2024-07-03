@@ -4,6 +4,9 @@ import lombok.Data;
 import tool_rental.models.Tool;
 import tool_rental.service.Checkout;
 
+/**
+ * Helper utility to calculate the final charge
+ */
 @Data
 public class CheckoutCalculator {
 
@@ -13,6 +16,10 @@ public class CheckoutCalculator {
         this.checkout = checkout;
     }
 
+    /**
+     * Calculate the final charge using the information from Checkout
+     * @return double
+     */
     public double getFinalCharge() {
         int discount = this.checkout.getDiscountPercentage();
         int applicableChargeDays = checkout.getApplicableChargeDays();
@@ -25,6 +32,11 @@ public class CheckoutCalculator {
         return roundToTwoDecimalPlaces(finalCharge);
     }
 
+    /**
+     * Round to two decimal places
+     * @param value
+     * @return
+     */
     private double roundToTwoDecimalPlaces(double value) {
         return Math.round(value * 100.0) / 100.0;
     }

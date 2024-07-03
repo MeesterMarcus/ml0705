@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
 
 import lombok.Data;
 
+/**
+ * This class represents the RentalAgreement that will be built at checkout for the tool rental
+ */
 @Data
 public class RentalAgreement {
     private final Tool tool;

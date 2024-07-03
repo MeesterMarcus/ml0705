@@ -6,6 +6,9 @@ import tool_rental.service.Checkout;
 import tool_rental.service.RentalAgreement;
 import tool_rental.utils.CLI;
 
+/**
+ * Main entry point into the application. If CLI_ENABLED, run the CLI, else run the example
+ */
 public class App {
     private static final boolean CLI_ENABLED = true;
 

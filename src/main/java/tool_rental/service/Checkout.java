@@ -9,6 +9,9 @@ import tool_rental.models.ToolInventory;
 import tool_rental.utils.ChargeDays;
 import tool_rental.utils.CheckoutCalculator;
 
+/**
+ * This class handles the checkout operations required to rent a tool
+ */
 @Data
 public class Checkout {
     private Tool tool;
@@ -19,7 +22,13 @@ public class Checkout {
     private LocalDate checkoutDate;
     private double total;
 
-    // Primary constructor
+    /**
+     * Primary constructor
+     * @param toolCode: String representing the unique lookup code for a tool
+     * @param numDaysRenting: int representing the base num days renting
+     * @param discountPercentage: int representing the discount percent e.g. 25 -> 25%
+     * @param checkoutDate: LocalDate representing the checkout date
+     */
     public Checkout(String toolCode, int numDaysRenting, int discountPercentage, LocalDate checkoutDate) {
         if (numDaysRenting < 1) {
             throw new IllegalArgumentException(AppConstants.INVALID_RENTAL_DAYS);
@@ -34,11 +43,19 @@ public class Checkout {
         initializeCheckout();
     }
 
-    // Constructor without discount
+    /**
+     * Constructor without discount
+     * @param toolCode: String representing the unique lookup code for a tool
+     * @param numDaysRenting: int representing the base num days renting
+     * @param checkoutDate: LocalDate representing the checkout date
+     */
     public Checkout(String toolCode, int numDaysRenting, LocalDate checkoutDate) {
         this(toolCode, numDaysRenting, 0, checkoutDate);
     }
 
+    /**
+     * Initialize the properties needed in order to checkout and rent the item
+     */
     private void initializeCheckout() {
         this.tool = ToolInventory.getToolByCode(toolCode);
         boolean weekdayCharge = this.tool.getType().isWeekdayCharge();
@@ -50,6 +67,9 @@ public class Checkout {
         this.total = calculator.getFinalCharge();
     }
 
+    /**
+     * Use the RentalAgreement class to build the agreement, and print to the console
+     */
     public void printAgreement() {
         RentalAgreement agreement = new RentalAgreement(this);
         System.out.println(agreement.generateAgreement());

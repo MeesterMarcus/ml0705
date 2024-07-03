@@ -1,5 +1,8 @@
 package tool_rental.constants;
 
+/**
+ * This file is used in order to store constants used throughout the app.
+ */
 public final class AppConstants {
 
     // Private constructor to prevent instantiation

@@ -3,6 +3,10 @@ package tool_rental.models;
 import lombok.Data;
 import tool_rental.constants.AppConstants;
 
+/**
+ * This is the Tool class, which tells us information about the tool such as the code, brand, and the type which in itself
+ * contains the information about charge days and daily charge price.
+ */
 @Data
 public class Tool {
     private final String code;

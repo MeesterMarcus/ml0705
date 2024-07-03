@@ -10,6 +10,9 @@ import tool_rental.constants.AppConstants;
 import tool_rental.service.Checkout;
 import tool_rental.service.RentalAgreement;
 
+/**
+ * Unit tests to ensure our checkout and agreement functionality is working as intended
+ */
 public class AppTest {
 
     @Test
