@@ -1,7 +1,6 @@
 package tool_rental.service;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import lombok.Data;
 import tool_rental.models.Tool;
