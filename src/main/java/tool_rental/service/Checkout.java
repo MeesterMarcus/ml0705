@@ -48,4 +48,9 @@ public class Checkout {
         CheckoutCalculator calculator = new CheckoutCalculator(this);
         this.total = calculator.getFinalCharge();
     }
+
+    public void printAgreement() {
+        RentalAgreement agreement = new RentalAgreement(this);
+        System.out.println(agreement.generateAgreement());
+    }
 }
