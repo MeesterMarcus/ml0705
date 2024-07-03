@@ -3,6 +3,7 @@ package tool_rental.service;
 import java.time.LocalDate;
 
 import lombok.Data;
+import tool_rental.constants.AppConstants;
 import tool_rental.models.Tool;
 import tool_rental.models.ToolInventory;
 import tool_rental.utils.ChargeDays;
@@ -21,10 +22,10 @@ public class Checkout {
     // Primary constructor
     public Checkout(String toolCode, int numDaysRenting, int discountPercentage, LocalDate checkoutDate) {
         if (numDaysRenting < 1) {
-            throw new IllegalArgumentException("Number of days renting must be 1 or more days.");
+            throw new IllegalArgumentException(AppConstants.INVALID_RENTAL_DAYS);
         }
         if (discountPercentage < 0 || discountPercentage > 100) {
-            throw new IllegalArgumentException("Discount percentage is not valid.");
+            throw new IllegalArgumentException(AppConstants.INVALID_DISCOUNT);
         }
         this.toolCode = toolCode;
         this.numDaysRenting = numDaysRenting;

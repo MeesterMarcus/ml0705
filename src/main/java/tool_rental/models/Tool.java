@@ -1,6 +1,7 @@
 package tool_rental.models;
 
 import lombok.Data;
+import tool_rental.constants.AppConstants;
 
 @Data
 public class Tool {
@@ -9,9 +10,9 @@ public class Tool {
     private final String brand;
 
     public enum ToolType {
-        LADDER("Ladder", 1.99, true, true, false),
-        CHAINSAW("Chainsaw", 1.49, true, false, true),
-        JACKHAMMER("Jackhammer", 2.99, true, false, false);
+        LADDER(AppConstants.LADDER_TYPE, 1.99, true, true, false),
+        CHAINSAW(AppConstants.CHAINSAW_TYPE, 1.49, true, false, true),
+        JACKHAMMER(AppConstants.JACKHAMMER_TYPE, 2.99, true, false, false);
 
         private final String name;
         private final double dailyCharge;
