@@ -1,28 +1,23 @@
 package tool_rental.models;
 
-import lombok.Getter;
+import lombok.Data;
 
+@Data
 public class Tool {
-    @Getter private final String code;
-    @Getter private final ToolType type;
-    @Getter private final String brand;
-
-    public Tool(String code, ToolType type, String brand) {
-        this.code = code;
-        this.type = type;
-        this.brand = brand;
-    }
+    private final String code;
+    private final ToolType type;
+    private final String brand;
 
     public enum ToolType {
         LADDER("Ladder", 1.99, true, true, false),
         CHAINSAW("Chainsaw", 1.49, true, false, true),
         JACKHAMMER("Jackhammer", 2.99, true, false, false);
 
-        @Getter private final String name;
-        @Getter private final double dailyCharge;
-        @Getter private final boolean weekdayCharge;
-        @Getter private final boolean weekendCharge;
-        @Getter private final boolean holidayCharge;
+        private final String name;
+        private final double dailyCharge;
+        private final boolean weekdayCharge;
+        private final boolean weekendCharge;
+        private final boolean holidayCharge;
 
         ToolType(String name, double dailyCharge, boolean weekdayCharge, boolean weekendCharge, boolean holidayCharge) {
             this.name = name;
@@ -31,5 +26,11 @@ public class Tool {
             this.weekendCharge = weekendCharge;
             this.holidayCharge = holidayCharge;
         }
+
+        public String getName() { return name; }
+        public double getDailyCharge() { return dailyCharge; }
+        public boolean isWeekdayCharge() { return weekdayCharge; }
+        public boolean isWeekendCharge() { return weekendCharge; }
+        public boolean isHolidayCharge() { return holidayCharge; }
     }
 }

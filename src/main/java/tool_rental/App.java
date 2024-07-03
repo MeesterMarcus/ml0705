@@ -1,13 +1,16 @@
 package tool_rental;
 
-/**
- * Hello world!
- *
- */
+
+import tool_rental.models.Tool;
+import tool_rental.models.ToolInventory;
+
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Tool chainsaw = ToolInventory.getToolByCode("CHNS");
+        System.out.println(chainsaw);
+        System.out.println(chainsaw.getType().getDailyCharge());
     }
 }
