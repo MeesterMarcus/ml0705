@@ -1,16 +1,15 @@
 package tool_rental;
 
-
-import tool_rental.models.Tool;
-import tool_rental.models.ToolInventory;
+import java.time.LocalDate;
+import tool_rental.service.Checkout;
 
 
 public class App 
 {
     public static void main( String[] args )
     {
-        Tool chainsaw = ToolInventory.getToolByCode("CHNS");
-        System.out.println(chainsaw);
-        System.out.println(chainsaw.getType().getDailyCharge());
+        String code = "CHNS";
+        Checkout checkout = new Checkout(code, 10, 25, LocalDate.now());
+        System.out.println(checkout.getTotal());
     }
 }
