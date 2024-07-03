@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import tool_rental.service.Checkout;
+import tool_rental.constants.AppConstants;
 import tool_rental.models.ToolInventory;
 
 public class CLI {
@@ -13,15 +14,12 @@ public class CLI {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
     public static void start() {
-        System.out.println("Welcome to the Tool Rental Point of Sales System");
+        System.out.println(AppConstants.WELCOME_MESSAGE);
 
         while (true) {
-            System.out.println("\nPlease select an option:");
-            System.out.println("1. Rent a tool");
-            System.out.println("2. View available tools");
-            System.out.println("3. Exit");
+            System.out.println(AppConstants.MAIN_MENU);
 
-            int choice = getIntInput("Enter your choice: ");
+            int choice = getIntInput(AppConstants.CHOICE_PROMPT);
 
             switch (choice) {
                 case 1:
@@ -31,32 +29,37 @@ public class CLI {
                     viewAvailableTools();
                     break;
                 case 3:
-                    System.out.println("\nThank you for using the Tool Rental Point of Sales System. Goodbye!");
+                    System.out.println(AppConstants.EXIT_MESSAGE);
+                    System.out.println(AppConstants.SEPARATOR);
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(AppConstants.INVALID_CHOICE);
             }
         }
     }
 
     private static void rentTool() {
-        String toolCode = getStringInput("Enter tool code: ");
-        int rentalDays = getIntInput("Enter number of rental days: ");
-        int discountPercent = getIntInput("Enter discount percentage (0-100): ");
-        LocalDate checkoutDate = getDateInput("Enter checkout date (MM/dd/yyyy): ");
+        System.out.println(AppConstants.RENT_TOOL_HEADER);
+
+        String toolCode = getStringInput(AppConstants.TOOL_CODE_PROMPT);
+        int rentalDays = getIntInput(AppConstants.RENTAL_DAYS_PROMPT);
+        int discountPercent = getIntInput(AppConstants.DISCOUNT_PROMPT);
+        LocalDate checkoutDate = getDateInput(AppConstants.CHECKOUT_DATE_PROMPT);
 
         try {
             Checkout checkout = new Checkout(toolCode, rentalDays, discountPercent, checkoutDate);
             checkout.printAgreement();
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(AppConstants.ERROR_PREFIX + e.getMessage());
         }
     }
 
     private static void viewAvailableTools() {
-        System.out.println("\nAvailable Tools:");
+        System.out.println(AppConstants.AVAILABLE_TOOLS_HEADER);
         ToolInventory.getAllTools().forEach(
-                (code, tool) -> System.out.println(code + " - " + tool.getType() + " (" + tool.getBrand() + ")"));
+                (code, tool) -> System.out.println(AppConstants.TOOL_INFO_PREFIX + "Code: " + code + ", Type: "
+                        + tool.getType().getName() + ", Brand: " + tool.getBrand()));
+        System.out.println(AppConstants.SEPARATOR);
     }
 
     private static String getStringInput(String prompt) {
@@ -70,7 +73,7 @@ public class CLI {
                 System.out.print(prompt);
                 return Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println(AppConstants.INVALID_NUMBER_INPUT);
             }
         }
     }
@@ -81,7 +84,7 @@ public class CLI {
                 System.out.print(prompt);
                 return LocalDate.parse(scanner.nextLine().trim(), dateFormatter);
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date format. Please use MM/dd/yyyy.");
+                System.out.println(AppConstants.INVALID_DATE_FORMAT);
             }
         }
     }

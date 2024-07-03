@@ -7,7 +7,7 @@ import tool_rental.service.RentalAgreement;
 import tool_rental.utils.CLI;
 
 public class App {
-    private static final boolean CLI_ENABLED = false;
+    private static final boolean CLI_ENABLED = true;
 
     public static void main(String[] args) {
         if (CLI_ENABLED) {
