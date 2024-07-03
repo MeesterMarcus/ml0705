@@ -5,28 +5,35 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public class ChargeDays {
-    
-    public static int countChargeDays(LocalDate startDate, int rentalDays, boolean chargeWeekday, boolean chargeWeekend, boolean chargeHoliday) {
-        LocalDate endDate = startDate.plusDays(rentalDays);
+
+    public static int countChargeDays(LocalDate checkoutDate, int rentalDays, boolean chargeWeekday,
+            boolean chargeWeekend, boolean chargeHoliday) {
+        LocalDate startDate = checkoutDate.plusDays(1);
+        LocalDate endDate = checkoutDate.plusDays(rentalDays);
         int chargeDays = 0;
 
-        for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
+        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
             if (isChargeableDay(date, chargeWeekday, chargeWeekend, chargeHoliday)) {
                 chargeDays++;
+            } else {
             }
         }
 
         return chargeDays;
     }
 
-    private static boolean isChargeableDay(LocalDate date, boolean chargeWeekday, boolean chargeWeekend, boolean chargeHoliday) {
-        if (isWeekend(date) && !chargeWeekend) {
+    private static boolean isChargeableDay(LocalDate date, boolean chargeWeekday, boolean chargeWeekend,
+            boolean chargeHoliday) {
+        boolean isWeekend = isWeekend(date);
+        boolean isHoliday = isHoliday(date);
+
+        if (isWeekend && !chargeWeekend) {
             return false;
         }
-        if (isHoliday(date) && !chargeHoliday) {
+        if (isHoliday && !chargeHoliday) {
             return false;
         }
-        if (!isWeekend(date) && !isHoliday(date) && !chargeWeekday) {
+        if (!isWeekend && !isHoliday && !chargeWeekday) {
             return false;
         }
         return true;
@@ -42,23 +49,24 @@ public class ChargeDays {
     }
 
     private static boolean isIndependenceDay(LocalDate date) {
-        if (date.getMonth() == Month.JULY && date.getDayOfMonth() == 4) {
-            return true;
+        LocalDate observedDate = getObservedIndependenceDay(date.getYear());
+        return date.equals(observedDate);
+    }
+
+    private static LocalDate getObservedIndependenceDay(int year) {
+        LocalDate julyFourth = LocalDate.of(year, Month.JULY, 4);
+        if (julyFourth.getDayOfWeek() == DayOfWeek.SATURDAY) {
+            return julyFourth.minusDays(1); // Observed on Friday
+        } else if (julyFourth.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            return julyFourth.plusDays(1); // Observed on Monday
         }
-        // If July 4th is on a Saturday, Friday the 3rd is observed. If on Sunday, Monday the 5th is observed.
-        if (date.getMonth() == Month.JULY && date.getDayOfMonth() == 3 && date.getDayOfWeek() == DayOfWeek.FRIDAY) {
-            return true;
-        }
-        if (date.getMonth() == Month.JULY && date.getDayOfMonth() == 5 && date.getDayOfWeek() == DayOfWeek.MONDAY) {
-            return true;
-        }
-        return false;
+        return julyFourth;
     }
 
     private static boolean isLaborDay(LocalDate date) {
-        return date.getMonth() == Month.SEPTEMBER && 
-               date.getDayOfWeek() == DayOfWeek.MONDAY && 
-               date.getDayOfMonth() <= 7;
+        return date.getMonth() == Month.SEPTEMBER &&
+                date.getDayOfWeek() == DayOfWeek.MONDAY &&
+                date.getDayOfMonth() <= 7;
     }
 
     public static LocalDate calculateDueDate(LocalDate checkoutDate, int rentalDays) {

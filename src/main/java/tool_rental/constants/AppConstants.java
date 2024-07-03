@@ -1,9 +1,10 @@
 package tool_rental.constants;
 
 public final class AppConstants {
-    
+
     // Private constructor to prevent instantiation
-    private AppConstants() {}
+    private AppConstants() {
+    }
 
     // Tool Codes
     public static final String CHAINSAW_CODE = "CHNS";

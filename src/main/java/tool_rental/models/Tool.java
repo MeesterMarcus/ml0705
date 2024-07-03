@@ -28,10 +28,24 @@ public class Tool {
             this.holidayCharge = holidayCharge;
         }
 
-        public String getName() { return name; }
-        public double getDailyCharge() { return dailyCharge; }
-        public boolean isWeekdayCharge() { return weekdayCharge; }
-        public boolean isWeekendCharge() { return weekendCharge; }
-        public boolean isHolidayCharge() { return holidayCharge; }
+        public String getName() {
+            return name;
+        }
+
+        public double getDailyCharge() {
+            return dailyCharge;
+        }
+
+        public boolean isWeekdayCharge() {
+            return weekdayCharge;
+        }
+
+        public boolean isWeekendCharge() {
+            return weekendCharge;
+        }
+
+        public boolean isHolidayCharge() {
+            return holidayCharge;
+        }
     }
 }

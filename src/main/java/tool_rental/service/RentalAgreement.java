@@ -4,9 +4,14 @@ import tool_rental.models.Tool;
 import tool_rental.utils.ChargeDays;
 import tool_rental.utils.CheckoutCalculator;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import lombok.Data;
+
+@Data
 public class RentalAgreement {
     private final Tool tool;
     private final int rentalDays;
@@ -31,16 +36,16 @@ public class RentalAgreement {
         this.discountPercent = checkout.getDiscountPercentage();
 
         CheckoutCalculator calculator = new CheckoutCalculator(checkout);
-        this.finalCharge = calculator.getFinalCharge();
+        this.finalCharge = round(calculator.getFinalCharge());
 
-        this.preDiscountCharge = chargeDays * dailyRentalCharge;
-        this.discountAmount = preDiscountCharge - finalCharge;
+        this.preDiscountCharge = round(chargeDays * dailyRentalCharge);
+        this.discountAmount = round(preDiscountCharge * discountPercent / 100);
     }
 
     public String generateAgreement() {
         StringBuilder agreement = new StringBuilder();
         String separator = "------------------------------------------------------------";
-    
+
         agreement.append("\n").append(separator).append("\n");
         agreement.append("                   Rental Agreement                    \n");
         agreement.append(separator).append("\n");
@@ -57,10 +62,9 @@ public class RentalAgreement {
         agreement.append(String.format("%-20s: %s%n", "Discount amount", formatCurrency(discountAmount)));
         agreement.append(String.format("%-20s: %s%n", "Final charge", formatCurrency(finalCharge)));
         agreement.append(separator).append("\n");
-    
+
         return agreement.toString();
     }
-    
 
     private String formatDate(LocalDate date) {
         return date.format(DATE_FORMATTER);
@@ -74,5 +78,9 @@ public class RentalAgreement {
         return percent + "%";
     }
 
-    // Getters for all fields (omitted for brevity)
+    private double round(double value) {
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 }

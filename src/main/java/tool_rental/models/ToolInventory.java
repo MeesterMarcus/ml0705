@@ -6,17 +6,22 @@ import java.util.Map;
 import tool_rental.constants.AppConstants;
 
 /**
- * A simple in-memory database to store the relavant tools. For a more robust and production ready
+ * A simple in-memory database to store the relavant tools. For a more robust
+ * and production ready
  * solution, we would of course want to use a real database system.
  */
 public class ToolInventory {
     private static final Map<String, Tool> toolInventory = new HashMap<>();
 
     static {
-        toolInventory.put(AppConstants.CHAINSAW_CODE, new Tool(AppConstants.CHAINSAW_CODE, Tool.ToolType.CHAINSAW, AppConstants.STIHL_BRAND));
-        toolInventory.put(AppConstants.LADDER_CODE, new Tool(AppConstants.LADDER_CODE, Tool.ToolType.LADDER, AppConstants.WERNER_BRAND));
-        toolInventory.put(AppConstants.JACKHAMMER_DEWALT_CODE, new Tool(AppConstants.JACKHAMMER_DEWALT_CODE, Tool.ToolType.JACKHAMMER, AppConstants.DEWALT_BRAND));
-        toolInventory.put(AppConstants.JACKHAMMER_RIDGID_CODE, new Tool(AppConstants.JACKHAMMER_RIDGID_CODE, Tool.ToolType.JACKHAMMER, AppConstants.RIDGID_BRAND));
+        toolInventory.put(AppConstants.CHAINSAW_CODE,
+                new Tool(AppConstants.CHAINSAW_CODE, Tool.ToolType.CHAINSAW, AppConstants.STIHL_BRAND));
+        toolInventory.put(AppConstants.LADDER_CODE,
+                new Tool(AppConstants.LADDER_CODE, Tool.ToolType.LADDER, AppConstants.WERNER_BRAND));
+        toolInventory.put(AppConstants.JACKHAMMER_DEWALT_CODE,
+                new Tool(AppConstants.JACKHAMMER_DEWALT_CODE, Tool.ToolType.JACKHAMMER, AppConstants.DEWALT_BRAND));
+        toolInventory.put(AppConstants.JACKHAMMER_RIDGID_CODE,
+                new Tool(AppConstants.JACKHAMMER_RIDGID_CODE, Tool.ToolType.JACKHAMMER, AppConstants.RIDGID_BRAND));
     }
 
     public static Tool getToolByCode(String code) {

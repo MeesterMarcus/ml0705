@@ -18,7 +18,7 @@ public class Checkout {
     private int discountPercentage;
     private LocalDate checkoutDate;
     private double total;
-    
+
     // Primary constructor
     public Checkout(String toolCode, int numDaysRenting, int discountPercentage, LocalDate checkoutDate) {
         if (numDaysRenting < 1) {
@@ -44,7 +44,8 @@ public class Checkout {
         boolean weekdayCharge = this.tool.getType().isWeekdayCharge();
         boolean weekendCharge = this.tool.getType().isWeekendCharge();
         boolean holidayCharge = this.tool.getType().isHolidayCharge();
-        this.applicableChargeDays = ChargeDays.countChargeDays(checkoutDate, numDaysRenting, weekdayCharge, weekendCharge, holidayCharge);
+        this.applicableChargeDays = ChargeDays.countChargeDays(checkoutDate, numDaysRenting, weekdayCharge,
+                weekendCharge, holidayCharge);
         CheckoutCalculator calculator = new CheckoutCalculator(this);
         this.total = calculator.getFinalCharge();
     }
