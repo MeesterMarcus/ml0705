@@ -8,8 +8,10 @@ public class App
 {
     public static void main( String[] args )
     {
-        String code = "CHNS";
-        Checkout checkout = new Checkout(code, 10, 25, LocalDate.now());
+        // Possible Tool codes:
+        // CHNS, LADW, JAKD, JAKR
+        String code = "LADW";
+        Checkout checkout = new Checkout(code, 35, 25, LocalDate.now());
         System.out.println(checkout.getTotal());
     }
 }
