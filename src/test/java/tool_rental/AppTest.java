@@ -19,7 +19,7 @@ public class AppTest {
      * Test 1: Exception for invalid discount percent
      */
     @Test
-    public void testCheckout1() {
+    public void testScenario1() {
         int invalidDiscount = 101;
         try {
             new Checkout(AppConstants.JACKHAMMER_RIDGID_CODE, 5, invalidDiscount, LocalDate.of(2015, 9, 3));
@@ -33,7 +33,7 @@ public class AppTest {
      * Test 2: 3 day rental of Ladder
      */
     @Test
-    public void testCheckout2() {
+    public void testScenario2() {
         Checkout checkout = new Checkout(AppConstants.LADDER_CODE, 3, 10, LocalDate.of(2020, 7, 2));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -55,7 +55,7 @@ public class AppTest {
      * Test 3: 5 day rental of Chainsaw
      */
     @Test
-    public void testCheckout3() {
+    public void testScenario3() {
         Checkout checkout = new Checkout(AppConstants.CHAINSAW_CODE, 5, 25, LocalDate.of(2015, 7, 2));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -77,7 +77,7 @@ public class AppTest {
      * Test 4: 6 day rental of DeWalt Jackhammer
      */
     @Test
-    public void testCheckout4() {
+    public void testScenario4() {
         Checkout checkout = new Checkout(AppConstants.JACKHAMMER_DEWALT_CODE, 6, 0, LocalDate.of(2015, 9, 3));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -99,7 +99,7 @@ public class AppTest {
      * Test 5: 9 day rental of Ridgid Jackhammer
      */
     @Test
-    public void testCheckout5() {
+    public void testScenario5() {
         Checkout checkout = new Checkout(AppConstants.JACKHAMMER_RIDGID_CODE, 9, 0, LocalDate.of(2015, 7, 2));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -121,7 +121,7 @@ public class AppTest {
      * Test 6: 4 day rental of Ridgid Jackhammer
      */
     @Test
-    public void testCheckout6() {
+    public void testScenario6() {
         Checkout checkout = new Checkout(AppConstants.JACKHAMMER_RIDGID_CODE, 4, 50, LocalDate.of(2020, 7, 2));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
