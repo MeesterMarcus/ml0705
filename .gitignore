@@ -1,2 +1,21 @@
-.vscode
-target
+# Gradle
+.gradle/
+build/
+
+# Ignore Gradle Wrapper files
+gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+gradle/wrapper/gradle-wrapper.jar
+
+# Ignore IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
