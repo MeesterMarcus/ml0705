@@ -1,11 +1,12 @@
 package tool_rental.service;
 
 import lombok.Data;
-import tool_rental.constants.AppConstants;
+import tool_rental.exceptions.ToolRentalExceptions;
+import tool_rental.interfaces.CalculationStrategy;
 import tool_rental.models.Tool;
 import tool_rental.models.ToolInventory;
 import tool_rental.utils.ChargeDays;
-import tool_rental.utils.CheckoutCalculator;
+import tool_rental.utils.StandardCalculationStrategy;
 
 import java.time.LocalDate;
 
@@ -14,6 +15,7 @@ import java.time.LocalDate;
  */
 @Data
 public class Checkout {
+
     private Tool tool;
     private String toolCode;
     private int numDaysRenting;
@@ -21,6 +23,7 @@ public class Checkout {
     private int discountPercentage;
     private LocalDate checkoutDate;
     private double total;
+    private CalculationStrategy calculationStrategy;
 
     /**
      * Primary constructor
@@ -32,10 +35,10 @@ public class Checkout {
      */
     public Checkout(String toolCode, int numDaysRenting, int discountPercentage, LocalDate checkoutDate) {
         if (numDaysRenting < 1) {
-            throw new IllegalArgumentException(AppConstants.INVALID_RENTAL_DAYS);
+            throw new ToolRentalExceptions.InvalidRentalDaysException(numDaysRenting);
         }
         if (discountPercentage < 0 || discountPercentage > 100) {
-            throw new IllegalArgumentException(AppConstants.INVALID_DISCOUNT);
+            throw new ToolRentalExceptions.InvalidDiscountException(discountPercentage);
         }
         this.toolCode = toolCode;
         this.numDaysRenting = numDaysRenting;
@@ -56,7 +59,7 @@ public class Checkout {
     }
 
     /**
-     * Initialize the properties needed in order to checkout and rent the item
+     * Initialize the properties needed in order to check out and rent the item
      */
     private void initializeCheckout() {
         this.tool = ToolInventory.getToolByCode(toolCode);
@@ -65,8 +68,8 @@ public class Checkout {
         boolean holidayCharge = this.tool.getType().isHolidayCharge();
         this.applicableChargeDays = ChargeDays.countChargeDays(checkoutDate, numDaysRenting, weekdayCharge,
                 weekendCharge, holidayCharge);
-        CheckoutCalculator calculator = new CheckoutCalculator(this);
-        this.total = calculator.getFinalCharge();
+        this.calculationStrategy = new StandardCalculationStrategy(); // Default strategy
+        this.total = calculationStrategy.calculateFinalCharge(this);
     }
 
     /**

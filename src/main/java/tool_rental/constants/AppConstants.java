@@ -27,8 +27,8 @@ public final class AppConstants {
     public static final String JACKHAMMER_TYPE = "Jackhammer";
 
     // Messages
-    public static final String INVALID_RENTAL_DAYS = "Number of days renting must be 1 or more days.";
-    public static final String INVALID_DISCOUNT = "Discount percentage is not valid.";
+    public static final String INVALID_RENTAL_DAYS = "Number of rental days must be at least 1, but was: ";
+    public static final String INVALID_DISCOUNT = "Discount percentage must be between 0 and 100, but was: ";
     public static final String TOOL_NOT_FOUND = "No tool found with code: ";
 
     // Rental Agreement

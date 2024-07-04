@@ -10,9 +10,11 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
- * Utility class that acts as a CLI for entering information into the Tool PoS System and retrieving agreement
+ * Utility class that acts as a CLI for entering information into the Tool PoS System and retrieving agreement.
+ * System.out.println is explicitly used here so that we print neatly to the console specifically for this CLI portion.
  */
 public class CLI {
+
     private static final Scanner scanner = new Scanner(System.in);
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 

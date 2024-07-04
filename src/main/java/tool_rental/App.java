@@ -1,5 +1,7 @@
 package tool_rental;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import tool_rental.service.Checkout;
 import tool_rental.service.RentalAgreement;
 import tool_rental.utils.CLI;
@@ -10,7 +12,8 @@ import java.time.LocalDate;
  * Main entry point into the application. If CLI_ENABLED, run the CLI, else run the example
  */
 public class App {
-    private static final boolean CLI_ENABLED = true;
+    private static final boolean CLI_ENABLED = false;
+    private static final Logger logger = LogManager.getLogger(Checkout.class);
 
     public static void main(String[] args) {
         if (CLI_ENABLED) {
@@ -29,9 +32,9 @@ public class App {
         try {
             Checkout checkout = new Checkout(toolCode, rentalDays, discountPercent, checkoutDate);
             RentalAgreement agreement = new RentalAgreement(checkout);
-            System.out.println(agreement.generateAgreement());
+            logger.info(agreement.generateAgreement());
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+            logger.error("Error: {}", e.getMessage());
         }
     }
 }

@@ -25,7 +25,7 @@ public class ChargeDays {
     }
 
     /**
-     * Determine whether or not the date fits the criteria for a chargeable day
+     * Determine whether the date fits the criteria for a chargeable day
      *
      * @param date:          LocalDate we are analyzing
      * @param chargeWeekday: boolean determining if we should charge weekdays
@@ -44,10 +44,7 @@ public class ChargeDays {
         if (isHoliday && !chargeHoliday) {
             return false;
         }
-        if (!isWeekend && !isHoliday && !chargeWeekday) {
-            return false;
-        }
-        return true;
+        return isWeekend || isHoliday || chargeWeekday;
     }
 
     /**

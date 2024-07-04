@@ -1,14 +1,15 @@
 package tool_rental.models;
 
 import tool_rental.constants.AppConstants;
+import tool_rental.exceptions.ToolRentalExceptions;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A simple in-memory database to store the relavant tools. For a more robust
- * and production ready
- * solution, we would of course want to use a real database system.
+ * A simple in-memory database to store the relevant tools. For a more robust
+ * and production ready solution, we would of course want to use a real database system. In a larger
+ * production system it may also make sense to introduce a factory pattern for building and retrieving tools.
  */
 public class ToolInventory {
     private static final Map<String, Tool> toolInventory = new HashMap<>();
@@ -33,7 +34,7 @@ public class ToolInventory {
     public static Tool getToolByCode(String code) {
         Tool tool = toolInventory.get(code);
         if (tool == null) {
-            throw new IllegalArgumentException(AppConstants.TOOL_NOT_FOUND + code);
+            throw new ToolRentalExceptions.InvalidToolCodeException(code);
         }
         return tool;
     }
@@ -54,7 +55,7 @@ public class ToolInventory {
      */
     public static void removeTool(String code) {
         if (!toolInventory.containsKey(code)) {
-            throw new IllegalArgumentException(AppConstants.TOOL_NOT_FOUND + code);
+            throw new ToolRentalExceptions.InvalidToolCodeException(code);
         }
         toolInventory.remove(code);
     }

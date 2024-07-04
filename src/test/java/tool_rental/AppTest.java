@@ -2,6 +2,7 @@ package tool_rental;
 
 import org.junit.Test;
 import tool_rental.constants.AppConstants;
+import tool_rental.exceptions.ToolRentalExceptions;
 import tool_rental.service.Checkout;
 import tool_rental.service.RentalAgreement;
 
@@ -19,11 +20,12 @@ public class AppTest {
      */
     @Test
     public void testCheckout1() {
+        int invalidDiscount = 101;
         try {
-            new Checkout(AppConstants.JACKHAMMER_RIDGID_CODE, 5, 101, LocalDate.of(2015, 9, 3));
+            new Checkout(AppConstants.JACKHAMMER_RIDGID_CODE, 5, invalidDiscount, LocalDate.of(2015, 9, 3));
             fail("Expected IllegalArgumentException was not thrown");
-        } catch (IllegalArgumentException e) {
-            assertEquals(AppConstants.INVALID_DISCOUNT, e.getMessage());
+        } catch (ToolRentalExceptions.InvalidDiscountException e) {
+            assertEquals(AppConstants.INVALID_DISCOUNT + invalidDiscount, e.getMessage());
         }
     }
 
@@ -142,11 +144,12 @@ public class AppTest {
      */
     @Test
     public void testInvalidRentalDays() {
+        int numDaysRenting = 0;
         try {
-            new Checkout(AppConstants.CHAINSAW_CODE, 0, 0, LocalDate.now());
+            new Checkout(AppConstants.CHAINSAW_CODE, numDaysRenting, 0, LocalDate.now());
             fail("Expected IllegalArgumentException was not thrown");
-        } catch (IllegalArgumentException e) {
-            assertEquals(AppConstants.INVALID_RENTAL_DAYS, e.getMessage());
+        } catch (ToolRentalExceptions.InvalidRentalDaysException e) {
+            assertEquals(AppConstants.INVALID_RENTAL_DAYS + numDaysRenting, e.getMessage());
         }
     }
 
@@ -158,7 +161,7 @@ public class AppTest {
         try {
             new Checkout("INVALID", 1, 0, LocalDate.now());
             fail("Expected IllegalArgumentException was not thrown");
-        } catch (IllegalArgumentException e) {
+        } catch (ToolRentalExceptions.InvalidToolCodeException e) {
             assertTrue(e.getMessage().startsWith(AppConstants.TOOL_NOT_FOUND));
         }
     }

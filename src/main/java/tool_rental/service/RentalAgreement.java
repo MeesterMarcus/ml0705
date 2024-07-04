@@ -4,7 +4,6 @@ import lombok.Data;
 import tool_rental.constants.AppConstants;
 import tool_rental.models.Tool;
 import tool_rental.utils.ChargeDays;
-import tool_rental.utils.CheckoutCalculator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -42,9 +41,7 @@ public class RentalAgreement {
         this.dailyRentalCharge = tool.getType().getDailyCharge();
         this.chargeDays = checkout.getApplicableChargeDays();
         this.discountPercent = checkout.getDiscountPercentage();
-
-        CheckoutCalculator calculator = new CheckoutCalculator(checkout);
-        this.finalCharge = round(calculator.getFinalCharge());
+        this.finalCharge = round(checkout.getTotal());
 
         this.preDiscountCharge = round(chargeDays * dailyRentalCharge);
         this.discountAmount = round(preDiscountCharge * discountPercent / 100);
