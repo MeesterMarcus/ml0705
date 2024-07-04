@@ -1,5 +1,6 @@
 package tool_rental.service;
 
+import tool_rental.constants.AppConstants;
 import tool_rental.models.Tool;
 import tool_rental.utils.ChargeDays;
 import tool_rental.utils.CheckoutCalculator;
@@ -29,6 +30,10 @@ public class RentalAgreement {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/dd/yy");
 
+    /**
+     * Primary constructor
+     * @param checkout: Checkout
+     */
     public RentalAgreement(Checkout checkout) {
         this.tool = checkout.getTool();
         this.rentalDays = checkout.getNumDaysRenting();
@@ -46,27 +51,22 @@ public class RentalAgreement {
     }
 
     public String generateAgreement() {
-        StringBuilder agreement = new StringBuilder();
-        String separator = "------------------------------------------------------------";
-
-        agreement.append("\n").append(separator).append("\n");
-        agreement.append("                   Rental Agreement                    \n");
-        agreement.append(separator).append("\n");
-        agreement.append(String.format("%-20s: %s%n", "Tool code", tool.getCode()));
-        agreement.append(String.format("%-20s: %s%n", "Tool type", tool.getType().getName()));
-        agreement.append(String.format("%-20s: %s%n", "Tool brand", tool.getBrand()));
-        agreement.append(String.format("%-20s: %d%n", "Rental days", rentalDays));
-        agreement.append(String.format("%-20s: %s%n", "Check out date", formatDate(checkoutDate)));
-        agreement.append(String.format("%-20s: %s%n", "Due date", formatDate(dueDate)));
-        agreement.append(String.format("%-20s: %s%n", "Daily rental charge", formatCurrency(dailyRentalCharge)));
-        agreement.append(String.format("%-20s: %d%n", "Charge days", chargeDays));
-        agreement.append(String.format("%-20s: %s%n", "Pre-discount charge", formatCurrency(preDiscountCharge)));
-        agreement.append(String.format("%-20s: %s%n", "Discount percent", formatPercent(discountPercent)));
-        agreement.append(String.format("%-20s: %s%n", "Discount amount", formatCurrency(discountAmount)));
-        agreement.append(String.format("%-20s: %s%n", "Final charge", formatCurrency(finalCharge)));
-        agreement.append(separator).append("\n");
-
-        return agreement.toString();
+        return "\n" + AppConstants.RENTAL_AGREEMENT_SEPARATOR + "\n" +
+                "                   Rental Agreement                    \n" +
+                AppConstants.RENTAL_AGREEMENT_SEPARATOR + "\n" +
+                String.format("%-20s: %s%n", "Tool code", tool.getCode()) +
+                String.format("%-20s: %s%n", "Tool type", tool.getType().getName()) +
+                String.format("%-20s: %s%n", "Tool brand", tool.getBrand()) +
+                String.format("%-20s: %d%n", "Rental days", rentalDays) +
+                String.format("%-20s: %s%n", "Check out date", formatDate(checkoutDate)) +
+                String.format("%-20s: %s%n", "Due date", formatDate(dueDate)) +
+                String.format("%-20s: %s%n", "Daily rental charge", formatCurrency(dailyRentalCharge)) +
+                String.format("%-20s: %d%n", "Charge days", chargeDays) +
+                String.format("%-20s: %s%n", "Pre-discount charge", formatCurrency(preDiscountCharge)) +
+                String.format("%-20s: %s%n", "Discount percent", formatPercent(discountPercent)) +
+                String.format("%-20s: %s%n", "Discount amount", formatCurrency(discountAmount)) +
+                String.format("%-20s: %s%n", "Final charge", formatCurrency(finalCharge)) +
+                AppConstants.RENTAL_AGREEMENT_SEPARATOR + "\n";
     }
 
     private String formatDate(LocalDate date) {

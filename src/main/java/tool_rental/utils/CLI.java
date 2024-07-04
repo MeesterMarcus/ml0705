@@ -44,10 +44,10 @@ public class CLI {
     private static void rentTool() {
         System.out.println(AppConstants.RENT_TOOL_HEADER);
 
-        String toolCode = getStringInput(AppConstants.TOOL_CODE_PROMPT);
+        String toolCode = getStringInput();
         int rentalDays = getIntInput(AppConstants.RENTAL_DAYS_PROMPT);
         int discountPercent = getIntInput(AppConstants.DISCOUNT_PROMPT);
-        LocalDate checkoutDate = getDateInput(AppConstants.CHECKOUT_DATE_PROMPT);
+        LocalDate checkoutDate = getDateInput();
 
         try {
             Checkout checkout = new Checkout(toolCode, rentalDays, discountPercent, checkoutDate);
@@ -65,8 +65,8 @@ public class CLI {
         System.out.println(AppConstants.SEPARATOR);
     }
 
-    private static String getStringInput(String prompt) {
-        System.out.print(prompt);
+    private static String getStringInput() {
+        System.out.print(AppConstants.TOOL_CODE_PROMPT);
         return scanner.nextLine().trim();
     }
 
@@ -81,10 +81,10 @@ public class CLI {
         }
     }
 
-    private static LocalDate getDateInput(String prompt) {
+    private static LocalDate getDateInput() {
         while (true) {
             try {
-                System.out.print(prompt);
+                System.out.print(AppConstants.CHECKOUT_DATE_PROMPT);
                 return LocalDate.parse(scanner.nextLine().trim(), dateFormatter);
             } catch (DateTimeParseException e) {
                 System.out.println(AppConstants.INVALID_DATE_FORMAT);

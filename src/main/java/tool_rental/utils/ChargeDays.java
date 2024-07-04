@@ -18,7 +18,6 @@ public class ChargeDays {
         for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
             if (isChargeableDay(date, chargeWeekday, chargeWeekend, chargeHoliday)) {
                 chargeDays++;
-            } else {
             }
         }
 

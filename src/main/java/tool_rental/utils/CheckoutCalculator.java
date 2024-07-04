@@ -29,15 +29,6 @@ public class CheckoutCalculator {
         if (discount > 0) {
             finalCharge = totalWithoutDiscount - (totalWithoutDiscount * (discount / 100.0));
         }
-        return roundToTwoDecimalPlaces(finalCharge);
-    }
-
-    /**
-     * Round to two decimal places
-     * @param value
-     * @return
-     */
-    private double roundToTwoDecimalPlaces(double value) {
-        return Math.round(value * 100.0) / 100.0;
+        return finalCharge;
     }
 }

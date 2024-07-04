@@ -31,6 +31,9 @@ public final class AppConstants {
     public static final String INVALID_DISCOUNT = "Discount percentage is not valid.";
     public static final String TOOL_NOT_FOUND = "No tool found with code: ";
 
+    // Rental Agreement
+    public static final String RENTAL_AGREEMENT_SEPARATOR = "------------------------------------------------------------";
+
     // CLI
     public static final String WELCOME_MESSAGE = "**********************************************\n" +
             "*      Welcome to the Tool Rental POS        *\n" +
