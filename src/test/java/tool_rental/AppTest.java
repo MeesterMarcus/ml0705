@@ -15,9 +15,11 @@ import tool_rental.service.RentalAgreement;
  */
 public class AppTest {
 
+    /**
+     * Test 1: Exception for invalid discount percent
+     */
     @Test
     public void testCheckout1() {
-        // Test 1: Exception for invalid discount percent
         try {
             new Checkout(AppConstants.JACKHAMMER_RIDGID_CODE, 5, 101, LocalDate.of(2015, 9, 3));
             fail("Expected IllegalArgumentException was not thrown");
@@ -26,9 +28,11 @@ public class AppTest {
         }
     }
 
+    /**
+     * Test 2: 3 day rental of Ladder
+     */
     @Test
     public void testCheckout2() {
-        // Test 2: 3 day rental of Ladder
         Checkout checkout = new Checkout(AppConstants.LADDER_CODE, 3, 10, LocalDate.of(2020, 7, 2));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -46,9 +50,11 @@ public class AppTest {
         assertEquals(3.58, agreement.getFinalCharge(), 0.01);
     }
 
+    /**
+     * Test 3: 5 day rental of Chainsaw
+     */
     @Test
     public void testCheckout3() {
-        // Test 3: 5 day rental of Chainsaw
         Checkout checkout = new Checkout(AppConstants.CHAINSAW_CODE, 5, 25, LocalDate.of(2015, 7, 2));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -66,9 +72,11 @@ public class AppTest {
         assertEquals(3.35, agreement.getFinalCharge(), 0.01);
     }
 
+    /**
+     * Test 4: 6 day rental of DeWalt Jackhammer
+     */
     @Test
     public void testCheckout4() {
-        // Test 4: 6 day rental of DeWalt Jackhammer
         Checkout checkout = new Checkout(AppConstants.JACKHAMMER_DEWALT_CODE, 6, 0, LocalDate.of(2015, 9, 3));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -86,9 +94,11 @@ public class AppTest {
         assertEquals(8.97, agreement.getFinalCharge(), 0.01);
     }
 
+    /**
+     * Test 5: 9 day rental of Ridgid Jackhammer
+     */
     @Test
     public void testCheckout5() {
-        // Test 5: 9 day rental of Ridgid Jackhammer
         Checkout checkout = new Checkout(AppConstants.JACKHAMMER_RIDGID_CODE, 9, 0, LocalDate.of(2015, 7, 2));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -106,9 +116,11 @@ public class AppTest {
         assertEquals(14.95, agreement.getFinalCharge(), 0.01);
     }
 
+    /**
+     * Test 6: 4 day rental of Ridgid Jackhammer
+     */
     @Test
     public void testCheckout6() {
-        // Test 6: 4 day rental of Ridgid Jackhammer
         Checkout checkout = new Checkout(AppConstants.JACKHAMMER_RIDGID_CODE, 4, 50, LocalDate.of(2020, 7, 2));
         RentalAgreement agreement = new RentalAgreement(checkout);
 
@@ -126,9 +138,11 @@ public class AppTest {
         assertEquals(1.50, agreement.getFinalCharge(), 0.01);
     }
 
+    /**
+     * Additional test for invalid rental days
+     */
     @Test
     public void testInvalidRentalDays() {
-        // Additional test for invalid rental days
         try {
             new Checkout(AppConstants.CHAINSAW_CODE, 0, 0, LocalDate.now());
             fail("Expected IllegalArgumentException was not thrown");
@@ -137,9 +151,11 @@ public class AppTest {
         }
     }
 
+    /**
+     * Additional test for invalid tool code
+     */
     @Test
     public void testInvalidToolCode() {
-        // Additional test for invalid tool code
         try {
             new Checkout("INVALID", 1, 0, LocalDate.now());
             fail("Expected IllegalArgumentException was not thrown");
