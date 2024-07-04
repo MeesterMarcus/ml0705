@@ -20,3 +20,6 @@ This program is a Java-based application that allows you to rent tools and gener
 
 ## Unit Tests
 - Unit tests are stored in `test/java/tool_rental`
+
+## Additional Notes
+- A simple GitHub Action has been set up to run the test suite on each push to ensure no regression issues occur with new pushes.
