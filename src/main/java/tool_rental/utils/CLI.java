@@ -3,18 +3,14 @@ package tool_rental.utils;
 import tool_rental.constants.AppConstants;
 import tool_rental.models.ToolInventory;
 import tool_rental.service.Checkout;
+import tool_rental.exceptions.ToolRentalExceptions.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-/**
- * Utility class that acts as a CLI for entering information into the Tool PoS System and retrieving agreement.
- * System.out.println is explicitly used here so that we print neatly to the console specifically for this CLI portion.
- */
 public class CLI {
-
     private static final Scanner scanner = new Scanner(System.in);
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
@@ -46,17 +42,21 @@ public class CLI {
     private static void rentTool() {
         System.out.println(AppConstants.RENT_TOOL_HEADER);
 
-        String toolCode = getStringInput();
-        int rentalDays = getIntInput(AppConstants.RENTAL_DAYS_PROMPT);
-        int discountPercent = getIntInput(AppConstants.DISCOUNT_PROMPT);
-        LocalDate checkoutDate = getDateInput();
-
         try {
+            String toolCode = getStringInput();
+            int rentalDays = getIntInput(AppConstants.RENTAL_DAYS_PROMPT);
+            int discountPercent = getIntInput(AppConstants.DISCOUNT_PROMPT);
+            LocalDate checkoutDate = getDateInput();
+
             Checkout checkout = new Checkout(toolCode, rentalDays, discountPercent, checkoutDate);
             checkout.printAgreement();
-        } catch (IllegalArgumentException e) {
-            System.out.println(AppConstants.ERROR_PREFIX + e.getMessage());
+        } catch (InvalidToolCodeException | InvalidRentalDaysException | InvalidDiscountException e) {
+            System.err.println(AppConstants.ERROR_PREFIX + e.getMessage());
+        } catch (Exception e) {
+            System.err.println(AppConstants.ERROR_PREFIX + AppConstants.UNEXPECTED_ERROR);
+            System.err.println(AppConstants.ERROR_DETAILS + e.getMessage());
         }
+        System.out.println(AppConstants.SEPARATOR);
     }
 
     private static void viewAvailableTools() {

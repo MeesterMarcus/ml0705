@@ -58,5 +58,7 @@ public final class AppConstants {
     public static final String TOOL_INFO_PREFIX = "";
     public static final String SEPARATOR = "**********************************************";
     public static final String INVALID_NUMBER_INPUT = "Invalid input. Please enter a valid number.";
-    public static final String INVALID_DATE_FORMAT = "Invalid date format. Please use MM/dd/yyyy.";
+    public static final String INVALID_DATE_FORMAT = "Invalid date format. Please use MM/dd/yyyy";
+    public static final String UNEXPECTED_ERROR = "Encountered unexpected error.";
+    public static final String ERROR_DETAILS = "Error Details: ";
 }
