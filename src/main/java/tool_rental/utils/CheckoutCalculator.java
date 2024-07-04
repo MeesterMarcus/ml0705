@@ -18,6 +18,7 @@ public class CheckoutCalculator {
 
     /**
      * Calculate the final charge using the information from Checkout
+     *
      * @return double
      */
     public double getFinalCharge() {

@@ -1,13 +1,13 @@
 package tool_rental.utils;
 
+import tool_rental.constants.AppConstants;
+import tool_rental.models.ToolInventory;
+import tool_rental.service.Checkout;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
-import tool_rental.service.Checkout;
-import tool_rental.constants.AppConstants;
-import tool_rental.models.ToolInventory;
 
 /**
  * Utility class that acts as a CLI for entering information into the Tool PoS System and retrieving agreement

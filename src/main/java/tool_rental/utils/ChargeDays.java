@@ -10,7 +10,7 @@ import java.time.Month;
 public class ChargeDays {
 
     public static int countChargeDays(LocalDate checkoutDate, int rentalDays, boolean chargeWeekday,
-            boolean chargeWeekend, boolean chargeHoliday) {
+                                      boolean chargeWeekend, boolean chargeHoliday) {
         LocalDate startDate = checkoutDate.plusDays(1);
         LocalDate endDate = checkoutDate.plusDays(rentalDays);
         int chargeDays = 0;
@@ -26,14 +26,15 @@ public class ChargeDays {
 
     /**
      * Determine whether or not the date fits the criteria for a chargeable day
-     * @param date: LocalDate we are analyzing
+     *
+     * @param date:          LocalDate we are analyzing
      * @param chargeWeekday: boolean determining if we should charge weekdays
      * @param chargeWeekend: boolean determining if we should charge weekends
      * @param chargeHoliday: boolean determining if we should charge holidays
      * @return boolean
      */
     private static boolean isChargeableDay(LocalDate date, boolean chargeWeekday, boolean chargeWeekend,
-            boolean chargeHoliday) {
+                                           boolean chargeHoliday) {
         boolean isWeekend = isWeekend(date);
         boolean isHoliday = isHoliday(date);
 
@@ -51,6 +52,7 @@ public class ChargeDays {
 
     /**
      * Check if the date lands on a weekend
+     *
      * @param date: LocalDate we are analyzing
      * @return boolean
      */
@@ -61,6 +63,7 @@ public class ChargeDays {
 
     /**
      * Check if the date lands on a Holiday
+     *
      * @param date: LocalDate we are analyzing
      * @return boolean
      */
@@ -70,6 +73,7 @@ public class ChargeDays {
 
     /**
      * Helper function to check if date lands on Independence Day
+     *
      * @param date: LocalDate we are analyzing
      * @return boolean
      */
@@ -80,6 +84,7 @@ public class ChargeDays {
 
     /**
      * Helper function for Independence Day edge cases regarding weekend
+     *
      * @param year: int
      * @return LocalDate
      */
@@ -95,6 +100,7 @@ public class ChargeDays {
 
     /**
      * Helper function to check if date lands on Labor Day
+     *
      * @param date: LocalDate we are analyzing
      * @return boolean
      */
@@ -106,8 +112,9 @@ public class ChargeDays {
 
     /**
      * Given the checkout date and rental days, determine the due date
+     *
      * @param checkoutDate: LocalDate representing the date of checkout
-     * @param rentalDays: int representing the number of days the tool is being rented for
+     * @param rentalDays:   int representing the number of days the tool is being rented for
      * @return LocalDate
      */
     public static LocalDate calculateDueDate(LocalDate checkoutDate, int rentalDays) {

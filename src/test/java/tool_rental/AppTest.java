@@ -1,14 +1,13 @@
 package tool_rental;
 
-import static org.junit.Assert.*;
-
-import java.time.LocalDate;
-
 import org.junit.Test;
-
 import tool_rental.constants.AppConstants;
 import tool_rental.service.Checkout;
 import tool_rental.service.RentalAgreement;
+
+import java.time.LocalDate;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit tests to ensure our checkout and agreement functionality is working as intended

@@ -1,10 +1,10 @@
 package tool_rental;
 
-import java.time.LocalDate;
-
 import tool_rental.service.Checkout;
 import tool_rental.service.RentalAgreement;
 import tool_rental.utils.CLI;
+
+import java.time.LocalDate;
 
 /**
  * Main entry point into the application. If CLI_ENABLED, run the CLI, else run the example

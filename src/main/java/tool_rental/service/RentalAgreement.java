@@ -1,5 +1,6 @@
 package tool_rental.service;
 
+import lombok.Data;
 import tool_rental.constants.AppConstants;
 import tool_rental.models.Tool;
 import tool_rental.utils.ChargeDays;
@@ -9,8 +10,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import lombok.Data;
 
 /**
  * This class represents the RentalAgreement that will be built at checkout for the tool rental
@@ -32,6 +31,7 @@ public class RentalAgreement {
 
     /**
      * Primary constructor
+     *
      * @param checkout: Checkout
      */
     public RentalAgreement(Checkout checkout) {

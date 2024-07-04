@@ -1,9 +1,9 @@
 package tool_rental.models;
 
+import tool_rental.constants.AppConstants;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import tool_rental.constants.AppConstants;
 
 /**
  * A simple in-memory database to store the relavant tools. For a more robust
@@ -26,6 +26,7 @@ public class ToolInventory {
 
     /**
      * Retrieve a tool by tool code
+     *
      * @param code: String representing the unique lookup code for a tool
      * @return Tool
      */
@@ -39,6 +40,7 @@ public class ToolInventory {
 
     /**
      * Add a tool to the DB
+     *
      * @param tool: Tool
      */
     public static void addTool(Tool tool) {
@@ -47,6 +49,7 @@ public class ToolInventory {
 
     /**
      * Remove a tool from the DB
+     *
      * @param code: String representing the unique lookup code for a tool
      */
     public static void removeTool(String code) {
@@ -58,6 +61,7 @@ public class ToolInventory {
 
     /**
      * Retrieve all tools from the DB
+     *
      * @return Map<String, Tool>
      */
     public static Map<String, Tool> getAllTools() {

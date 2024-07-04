@@ -1,13 +1,13 @@
 package tool_rental.service;
 
-import java.time.LocalDate;
-
 import lombok.Data;
 import tool_rental.constants.AppConstants;
 import tool_rental.models.Tool;
 import tool_rental.models.ToolInventory;
 import tool_rental.utils.ChargeDays;
 import tool_rental.utils.CheckoutCalculator;
+
+import java.time.LocalDate;
 
 /**
  * This class handles the checkout operations required to rent a tool
@@ -24,10 +24,11 @@ public class Checkout {
 
     /**
      * Primary constructor
-     * @param toolCode: String representing the unique lookup code for a tool
-     * @param numDaysRenting: int representing the base num days renting
+     *
+     * @param toolCode:           String representing the unique lookup code for a tool
+     * @param numDaysRenting:     int representing the base num days renting
      * @param discountPercentage: int representing the discount percent e.g. 25 -> 25%
-     * @param checkoutDate: LocalDate representing the checkout date
+     * @param checkoutDate:       LocalDate representing the checkout date
      */
     public Checkout(String toolCode, int numDaysRenting, int discountPercentage, LocalDate checkoutDate) {
         if (numDaysRenting < 1) {
@@ -45,9 +46,10 @@ public class Checkout {
 
     /**
      * Constructor without discount
-     * @param toolCode: String representing the unique lookup code for a tool
+     *
+     * @param toolCode:       String representing the unique lookup code for a tool
      * @param numDaysRenting: int representing the base num days renting
-     * @param checkoutDate: LocalDate representing the checkout date
+     * @param checkoutDate:   LocalDate representing the checkout date
      */
     public Checkout(String toolCode, int numDaysRenting, LocalDate checkoutDate) {
         this(toolCode, numDaysRenting, 0, checkoutDate);
