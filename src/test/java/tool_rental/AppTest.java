@@ -40,7 +40,7 @@ public class AppTest {
         assertEquals("LADW", agreement.getTool().getCode());
         assertEquals("Ladder", agreement.getTool().getType().getName());
         assertEquals("Werner", agreement.getTool().getBrand());
-        assertEquals(3, agreement.getRentalDays());
+        assertEquals(99, agreement.getRentalDays());
         assertEquals(LocalDate.of(2020, 7, 2), agreement.getCheckoutDate());
         assertEquals(LocalDate.of(2020, 7, 5), agreement.getDueDate());
         assertEquals(1.99, agreement.getDailyRentalCharge(), 0.001);
