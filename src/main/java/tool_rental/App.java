@@ -12,7 +12,7 @@ import java.time.LocalDate;
  * Main entry point into the application. If CLI_ENABLED, run the CLI, else run the example
  */
 public class App {
-    private static final boolean CLI_ENABLED = false;
+    private static final boolean CLI_ENABLED = true;
     private static final Logger logger = LogManager.getLogger(Checkout.class);
 
     public static void main(String[] args) {
